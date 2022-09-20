@@ -22,11 +22,9 @@
   $result = $connect->query($sql);
   for ($user = array(); $row = $result->fetch_assoc(); $user[] = $row);
   $connect->close();
-
   $last = count($user) - 1;
   $last_id = $user[$last]['id'] + 1;
-
-
+  //
   if (isset($_POST['add_hero'])) {
     $name = $_POST['name'] ?? '0';
     $age = $_POST['age'] ?? '0';
@@ -37,7 +35,7 @@
     $connect->close();
     header("Location: /");
   }
-
+  //
   if (isset($_GET['change'])) {
     $id = $_GET['change'] ?? '';
     $name = $user[$id]['name'] ?? '';
@@ -45,7 +43,7 @@
     $rank = $user[$id]['rank'] ?? '';
     $id_base = $user[$id]['id'] ?? '';
   }
-
+  // 
   if (isset($_POST['edit_hero'])) {
     $name = $_POST['name'] ?? '0';
     $age = $_POST['age'] ?? '0';
@@ -56,7 +54,7 @@
     $connect->close();
     header("Location: /");
   }
-
+  //
   if (isset($_POST['delete_hero'])) {
     $connect = new mysqli(SERVER_NAME, DB_LOGIN, DB_PASS, DB_NAME);
     $sql = "DELETE FROM `heroes` WHERE `id` = '$id_base'";
